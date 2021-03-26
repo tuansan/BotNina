@@ -41,6 +41,8 @@ namespace DiscordFunAndGiveawayBot
 
             app.Run(async (context) =>
             {
+                await context.Response.WriteAsync("DiscordFunAndGiveawayBot is alive!");
+
                 if (!discordClient.IsRunning)
                 {
                     // You can add the token as an environment variable - e.g. as a Config Var in Heroku

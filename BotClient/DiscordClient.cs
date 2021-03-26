@@ -60,7 +60,7 @@ namespace BotClient
 
             // Login and start
             await Client.LoginAsync(Discord.TokenType.Bot, discordToken);
-            await Client.SetGameAsync("giveaway | %help");
+            await Client.SetGameAsync("Nothing... | .help");
             await Client.StartAsync();
         }
 
@@ -82,10 +82,12 @@ namespace BotClient
                     IResult result = await Commands.ExecuteAsync(context, argPos, Services);
                     // Ignore Unknown command error - otherwise all messages that begin with '!'
                     // and are no known commands would create an error
-                    if (!result.IsSuccess && !result.ErrorReason.Equals("Unknown command."))
+                    if (!result.IsSuccess && result.ErrorReason.Equals("Unknown command."))
                     {
                         await context.Channel.SendMessageAsync(result.ErrorReason);
                     }
+
+                    await userMessage.DeleteAsync();
                 }
             }
         }
