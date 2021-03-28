@@ -1,12 +1,14 @@
-﻿using Bot.Giveaway;
-using Bot.Interfaces;
+﻿using Bot.Interfaces;
 using BotClient;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using StreamMusicBot.Services;
 using System;
+using Victoria;
 
 namespace DiscordFunAndGiveawayBot
 {
@@ -23,13 +25,15 @@ namespace DiscordFunAndGiveawayBot
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IMusicService, MusicService>();
             services.AddSingleton<IDiscordClient, DiscordClient>();
-            services.AddSingleton<ICultureHelper, CultureHelper>();
+
+            services.AddSingleton<LavaRestClient>()
+            .AddSingleton<LavaSocketClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        [Obsolete]
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IDiscordClient discordClient, ICultureHelper cultureHelper)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDiscordClient discordClient)
         {
             if (env.IsDevelopment())
             {
@@ -41,13 +45,13 @@ namespace DiscordFunAndGiveawayBot
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("DiscordFunAndGiveawayBot is alive!");
+                await context.Response.WriteAsync("Bot Nina is alive!");
 
                 if (!discordClient.IsRunning)
                 {
                     // You can add the token as an environment variable - e.g. as a Config Var in Heroku
                     string discordToken = Environment.GetEnvironmentVariable("DiscordToken");
-                    await discordClient.RunBot(app.ApplicationServices, Configuration, cultureHelper, discordToken);
+                    await discordClient.RunBot(app.ApplicationServices, Configuration, discordToken);
                 }
             });
         }

@@ -15,10 +15,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.5.4" />
+    <PackageReference Include="Victoria" Version="4.0.18" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Bot.Giveaway\Bot.Giveaway.csproj" />
     <ProjectReference Include="..\BotClient\BotClient.csproj" />
   </ItemGroup>
 

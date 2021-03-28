@@ -2,12 +2,8 @@
 using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Globalization;
-using System.Reflection;
 using System.Threading.Tasks;
-using System.Linq;
 using Bot.Interfaces;
-using Bot.Giveaway;
 using Bot.CommonModules;
 
 namespace BotClient
@@ -17,7 +13,6 @@ namespace BotClient
         private CommandService Commands { get; set; }
         private IServiceProvider Services { get; set; }
 
-        public ICultureHelper CultureHelper { get; set; }
         public DiscordSocketClient Client { get; set; }
 
         public ISocketMessageChannel CurrentChannel { get; set; }
@@ -25,10 +20,9 @@ namespace BotClient
 
         public bool IsRunning { get; private set; }
 
-        public async Task RunBot(IServiceProvider provider, IConfiguration configuration, ICultureHelper cultureHelper, string discordToken = null)
+        public async Task RunBot(IServiceProvider provider, IConfiguration configuration,  string discordToken = null)
         {
             IsRunning = true;
-            CultureHelper = cultureHelper;
             Client = new DiscordSocketClient(new DiscordSocketConfig
             {
                 LogLevel = Discord.LogSeverity.Info
@@ -46,9 +40,8 @@ namespace BotClient
             // Read cultures from appsettings
 
             // Add this assembly for command fetching
-            await Commands.AddModuleAsync<GiveAway>(Services);
-            await Commands.AddModuleAsync<FunActions>(Services);
-            await Commands.AddModuleAsync<HelpModule>(Services);
+            await Commands.AddModuleAsync<AllModule>(Services);
+            await Commands.AddModuleAsync<Music>(Services);
 
             // Add eventhandlers
             Client.MessageReceived -= Client_MessageReceived;
@@ -68,16 +61,16 @@ namespace BotClient
         {
             if (arg is SocketUserMessage userMessage)
             {
+                if (userMessage.Author.IsBot) return;
+                
                 int argPos = 0;
 
                 // Receive all commands that start with '!'
-                if ((userMessage.HasCharPrefix('%', ref argPos) ||
-                    userMessage.HasMentionPrefix(Client.CurrentUser, ref argPos)) &&
-                    !userMessage.Author.IsBot)
+                if (userMessage.HasCharPrefix('.', ref argPos) ||
+                    userMessage.HasMentionPrefix(Client.CurrentUser, ref argPos))
                 {
                     CurrentChannel = arg.Channel;
-                    Console.WriteLine("CommandAccepted: " + arg.Content);
-                    CommandContext context = new CommandContext(Client, userMessage);
+                    ICommandContext context = new CommandContext(Client, userMessage);
                     // Execute the command
                     IResult result = await Commands.ExecuteAsync(context, argPos, Services);
                     // Ignore Unknown command error - otherwise all messages that begin with '!'
@@ -87,7 +80,6 @@ namespace BotClient
                         await context.Channel.SendMessageAsync(result.ErrorReason);
                     }
 
-                    await userMessage.DeleteAsync();
                 }
             }
         }

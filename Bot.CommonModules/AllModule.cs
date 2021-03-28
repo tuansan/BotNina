@@ -1,11 +1,11 @@
 ﻿using Discord;
 using Discord.Commands;
-using System.Linq;
+using System;
 using System.Threading.Tasks;
 
 namespace Bot.CommonModules
 {
-    public class FunActions : ModuleBase
+    public class AllModule : ModuleBase
     {
         private static IMessageChannel _channel;
         private static IUser _user;
@@ -14,9 +14,23 @@ namespace Bot.CommonModules
 
         private Interfaces.IDiscordClient _discordClient;
 
-        public FunActions(Interfaces.IDiscordClient client)
+        public AllModule(Interfaces.IDiscordClient client)
         {
             _discordClient = client;
+        }
+
+        [Command("help"), Summary("Shows help information")]
+        public async Task Help()
+        {
+            string help = string.Format("Xin chào! :tada:{0}{0}" +
+                "Đang viết con bot nè." +
+                "{0}........." +
+                "{0}{0}......... ", Environment.NewLine);
+
+
+            EmbedBuilder embed = new EmbedBuilder();
+            embed.WithDescription(help);
+            await ReplyAsync(string.Empty, false, embed.Build());
         }
 
         [Command("sendmessage"), Summary("Initializes a new MessageSend")]
@@ -28,7 +42,7 @@ namespace Bot.CommonModules
 
             _discordClient.Client.MessageReceived -= Client_MessageReceived;
             _discordClient.Client.MessageReceived += Client_MessageReceived;
-            await ReplyAsync(_discordClient.CultureHelper.GetAdminString("EnterMessageNow"));
+            await ReplyAsync();
         }
 
         [Command("sendmessage"), Summary("Initializes a new MessageSend")]
