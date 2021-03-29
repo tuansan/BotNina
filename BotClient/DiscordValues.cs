@@ -1,4 +1,4 @@
-﻿using Bot.Interfaces;
+﻿using BotClient.Interfaces;
 using Discord;
 
 namespace BotClient
