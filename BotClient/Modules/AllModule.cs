@@ -3,7 +3,7 @@ using Discord.Commands;
 using System;
 using System.Threading.Tasks;
 
-namespace Bot.CommonModules
+namespace BotClient.CommonModules
 {
     public class AllModule : ModuleBase
     {

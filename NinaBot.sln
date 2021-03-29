@@ -6,10 +6,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NinaBot", "BotNina\NinaBot.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BotClient", "BotClient\BotClient.csproj", "{62F325AE-68FD-4B27-B9E0-51EBDB801D3A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scheduler", "Scheduler\Scheduler.csproj", "{579CC95C-4783-44B2-B483-54948A9E31A4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bot.Interfaces", "Bot.Interfaces\Bot.Interfaces.csproj", "{3D800468-80F9-4DE9-8108-9009FC1FCF03}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,14 +20,6 @@ Global
 		{62F325AE-68FD-4B27-B9E0-51EBDB801D3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62F325AE-68FD-4B27-B9E0-51EBDB801D3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62F325AE-68FD-4B27-B9E0-51EBDB801D3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{579CC95C-4783-44B2-B483-54948A9E31A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{579CC95C-4783-44B2-B483-54948A9E31A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{579CC95C-4783-44B2-B483-54948A9E31A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{579CC95C-4783-44B2-B483-54948A9E31A4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3D800468-80F9-4DE9-8108-9009FC1FCF03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3D800468-80F9-4DE9-8108-9009FC1FCF03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3D800468-80F9-4DE9-8108-9009FC1FCF03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3D800468-80F9-4DE9-8108-9009FC1FCF03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

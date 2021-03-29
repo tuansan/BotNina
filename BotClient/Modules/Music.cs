@@ -1,7 +1,7 @@
-﻿using Discord;
+﻿using BotClient.Services;
+using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
-using StreamMusicBot.Services;
 using System.Threading.Tasks;
 
 namespace Bot.CommonModules

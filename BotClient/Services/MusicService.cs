@@ -1,12 +1,11 @@
-﻿using Bot.Interfaces;
-using Discord;
+﻿using Discord;
 using Discord.WebSocket;
 using System.Linq;
 using System.Threading.Tasks;
 using Victoria;
 using Victoria.Entities;
 
-namespace StreamMusicBot.Services
+namespace BotClient.Services
 {
     public interface IMusicService
     {
@@ -28,7 +27,7 @@ namespace StreamMusicBot.Services
         private readonly DiscordSocketClient _client;
 
         public MusicService(LavaRestClient lavaRestClient,
-            LavaSocketClient lavaSocketClient, Bot.Interfaces.IDiscordClient client)
+            LavaSocketClient lavaSocketClient, Interfaces.IDiscordClient client)
         {
             _lavaRestClient = lavaRestClient;
             _lavaSocketClient = lavaSocketClient;

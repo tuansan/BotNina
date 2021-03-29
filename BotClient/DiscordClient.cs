@@ -3,8 +3,9 @@ using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
-using Bot.Interfaces;
 using Bot.CommonModules;
+using BotClient.Interfaces;
+using BotClient.CommonModules;
 
 namespace BotClient
 {
