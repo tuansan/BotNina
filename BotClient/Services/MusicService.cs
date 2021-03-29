@@ -10,13 +10,21 @@ namespace BotClient.Services
     public interface IMusicService
     {
         Task InitializeAsync();
+
         Task ConnectAsync(SocketVoiceChannel voiceChannel, ITextChannel textChannel);
+
         Task LeaveAsync(SocketVoiceChannel voiceChannel);
+
         Task<string> PlayAsync(string query, ulong guildId);
+
         Task<string> StopAsync(ulong guildId);
+
         Task<string> SkipAsync(ulong guildId);
+
         Task<string> SetVolumeAsync(int vol, ulong guildId);
+
         Task<string> PauseOrResumeAsync(ulong guildId);
+
         Task<string> ResumeAsync(ulong guildId);
     }
 

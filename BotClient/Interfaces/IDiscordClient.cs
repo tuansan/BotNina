@@ -10,6 +10,6 @@ namespace BotClient.Interfaces
         DiscordSocketClient Client { get; set; }
         bool IsRunning { get; }
 
-        Task RunBot(IServiceProvider provider, IConfiguration configuration,  string discordToken = null);
+        Task RunBot(IServiceProvider provider, IConfiguration configuration, string discordToken = null);
     }
 }

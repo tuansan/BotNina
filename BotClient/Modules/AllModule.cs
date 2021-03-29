@@ -27,7 +27,6 @@ namespace BotClient.CommonModules
                 "{0}........." +
                 "{0}{0}......... ", Environment.NewLine);
 
-
             EmbedBuilder embed = new EmbedBuilder();
             embed.WithDescription(help);
             await ReplyAsync(string.Empty, false, embed.Build());

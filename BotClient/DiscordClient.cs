@@ -1,11 +1,11 @@
-﻿using Discord.Commands;
+﻿using Bot.CommonModules;
+using BotClient.CommonModules;
+using BotClient.Interfaces;
+using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
-using Bot.CommonModules;
-using BotClient.Interfaces;
-using BotClient.CommonModules;
 
 namespace BotClient
 {
@@ -18,10 +18,9 @@ namespace BotClient
 
         public ISocketMessageChannel CurrentChannel { get; set; }
 
-
         public bool IsRunning { get; private set; }
 
-        public async Task RunBot(IServiceProvider provider, IConfiguration configuration,  string discordToken = null)
+        public async Task RunBot(IServiceProvider provider, IConfiguration configuration, string discordToken = null)
         {
             IsRunning = true;
             Client = new DiscordSocketClient(new DiscordSocketConfig
@@ -63,7 +62,7 @@ namespace BotClient
             if (arg is SocketUserMessage userMessage)
             {
                 if (userMessage.Author.IsBot) return;
-                
+
                 int argPos = 0;
 
                 // Receive all commands that start with '!'
@@ -80,7 +79,6 @@ namespace BotClient
                     {
                         await context.Channel.SendMessageAsync(result.ErrorReason);
                     }
-
                 }
             }
         }
